@@ -8,3 +8,11 @@
  */
 
 rootProject.name = "kafka-streams-avro-codelab"
+
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven(url = "https://dl.bintray.com/gradle/gradle-plugins")
+    }
+}

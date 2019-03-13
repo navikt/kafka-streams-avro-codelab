@@ -1,0 +1,9 @@
+{
+    "name": "Resultat",
+    "namespace": "no.nav.kafka.streams.avro",
+    "type": "record",
+    "fields" : [
+        {"name": "stedsnavn", "type": "string"},
+        {"name": "kommune", "type": "long"}
+    ]
+}
