@@ -5,6 +5,6 @@
     "fields" : [
         {"name": "postnummer", "type": "string"},
         {"name": "stedsnavn", "type": "string"},
-        {"name": "kommune", "type": "string"}
+        {"name": "teller", "type": "string"}
     ]
 }
