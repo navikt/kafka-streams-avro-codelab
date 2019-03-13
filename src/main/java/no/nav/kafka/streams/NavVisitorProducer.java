@@ -1,14 +1,16 @@
 package no.nav.kafka.streams;
 
 
-import io.confluent.kafka.serializers.KafkaAvroDeserializer;
+import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
+import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import no.nav.kafka.streams.avro.Poststed;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,11 +26,11 @@ public class NavVisitorProducer {
     public static void main(String[] args) {
         final Set<Poststed> poststeder = PoststedLoader.hentPoststeder();
         final Properties props = new Properties();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, KafkaAvroDeserializer.class.getName());
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroDeserializer.class.getName());
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:29092");
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class.getName());
         props.put(KafkaAvroDeserializerConfig.SPECIFIC_AVRO_READER_CONFIG, "true");
-
+        props.put(AbstractKafkaAvroSerDeConfig.SCHEMA_REGISTRY_URL_CONFIG, "http://localhost:8081/");
 
         // create safe Producer
         props.setProperty(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
@@ -55,7 +57,7 @@ public class NavVisitorProducer {
                 final String stedsnavn = poststed.getStedsnavn();
 
                 // @todo: Create topic 'NavVisitorLocation'
-                final ProducerRecord<String, Poststed> record = new ProducerRecord<>("NavVisitorLocation", stedsnavn, poststed);
+                final ProducerRecord<String, Poststed> record = new ProducerRecord<>("test", stedsnavn, poststed);
 
                 //produce record
                 producer.send(record, new Callback() {
