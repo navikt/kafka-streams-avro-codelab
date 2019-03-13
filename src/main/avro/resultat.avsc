@@ -4,6 +4,6 @@
     "type": "record",
     "fields" : [
         {"name": "stedsnavn", "type": "string"},
-        {"name": "kommune", "type": "long"}
+        {"name": "teller", "type": "long"}
     ]
 }

@@ -57,7 +57,7 @@ public class NavVisitorProducer {
                 final String stedsnavn = poststed.getStedsnavn();
 
                 // @todo: Create topic 'NavVisitorLocation'
-                final ProducerRecord<String, Poststed> record = new ProducerRecord<>("test", stedsnavn, poststed);
+                final ProducerRecord<String, Poststed> record = new ProducerRecord<>("NavVisitorLocation", stedsnavn, poststed);
 
                 //produce record
                 producer.send(record, new Callback() {
