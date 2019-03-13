@@ -1,0 +1,10 @@
+{
+    "name": "Poststed",
+    "namespace": "no.nav.kafka.streams.avro",
+    "type": "record",
+    "fields" : [
+        {"name": "postnummer", "type": "string"},
+        {"name": "stedsnavn", "type": "string"},
+        {"name": "kommune", "type": "string"}
+    ]
+}
